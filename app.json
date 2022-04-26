@@ -7,7 +7,7 @@
         "UUID": {
             "description": "Xray UUID,You can generate new UUID using this website (https://www.uuidgenerator.net/) ",
             "required": false        
-        }
+        },
         "WS_PATH": {
             "description": "Xray WS_PATH ",
             "required": false        
