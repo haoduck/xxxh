@@ -1,11 +1,34 @@
-IyEvYmluL3NoCgojQ29uZmlnIHhyYXkKCnJtIC1yZiAvZXRjL3hyYXkvY29uZmlnLmpzb24KY2F0
-IDw8IEVPRiA+IC9ldGMveHJheS9jb25maWcuanNvbgp7CiAgImluYm91bmRzIjogWwogICAgewog
-ICAgICAicG9ydCI6ICRQT1JULAogICAgICAicHJvdG9jb2wiOiAiJHtQUk9UT0NPTDotdmxlc3N9
-IiwKICAgICAgInNldHRpbmdzIjogewogICAgICAgICJkZWNyeXB0aW9uIjogIm5vbmUiLAogICAg
-ICAgICJjbGllbnRzIjogWwogICAgICAgICAgewogICAgICAgICAgICAiaWQiOiAiJHtVVUlEOi1i
-ODMxMzgxZC02MzI0LTRkNTMtYWQ0Zi04Y2RhNDhiMzA4MTF9IgogICAgICAgICAgfQogICAgICAg
-IF0KICAgICAgfSwKICAgICAgInN0cmVhbVNldHRpbmdzIjogewogICAgICAgICJuZXR3b3JrIjog
-IndzIiwKICAgICAgICAid3NTZXR0aW5ncyI6IHsKICAgICAgICAgICJwYXRoIjogIiR7V1NfUEFU
-SDotL30iCiAgICAgICAgfQogICAgICB9CiAgICB9CiAgXSwKICAib3V0Ym91bmRzIjogWwogICAg
-ewogICAgICAicHJvdG9jb2wiOiAiZnJlZWRvbSIKICAgIH0KICBdCn0KRU9GCgojcnVuIHhyYXkK
-CnhyYXkgLWMgL2V0Yy94cmF5L2NvbmZpZy5qc29uCg==
+#!/bin/sh
+
+rm -rf /config.json
+cat << EOF > /config.json
+{
+  "inbounds": [
+    {
+      "port": $PORT,
+      "protocol": "${PROTOCOL:-vless}",
+      "settings": {
+        "decryption": "none",
+        "clients": [
+          {
+            "id": "${UUID:-b831381d-6324-4d53-ad4f-8cda48b30811}"
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "wsSettings": {
+          "path": "${WS_PATH:-/}"
+        }
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom"
+    }
+  ]
+}
+EOF
+
+xray -c /config.json
