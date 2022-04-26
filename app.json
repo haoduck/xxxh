@@ -4,15 +4,22 @@
     "logo":"https://telegra.ph/file/29a269dbbfa0dac35786d.jpg",
     "keywords": ["xray"],
     "env": {
-        "UUID": {
-            "description": "Xray UUID,You can generate new UUID using this website (https://www.uuidgenerator.net/) ",
-            "required": false        
-        },
-        "WS_PATH": {
-            "description": "Xray WS_PATH ",
-            "required": false        
-        }
+    "PROTOCOL": {
+      "description": "协议VMess或VLESS，请填小写的vmess或vless",
+      "value": "vless",
+      "required": true
     },
+    "UUID": {
+      "description": "用户的主ID",
+      "value": "b831381d-6324-4d53-ad4f-8cda48b30811",
+      "required": false
+    },
+    "WS_PATH": {
+      "description": "websocket路径",
+      "value": "/",
+      "required": false
+    }
+  },
     "repository": "https://github.com/heshan2/heroku-xray-server",
     "stack": "container"
 }
