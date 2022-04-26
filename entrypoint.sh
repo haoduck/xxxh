@@ -1,9 +1,34 @@
-Y2F0IDw8IEVPRiA+IC9ldGMveHJheS9jb25maWcuanNvbgp7CiAgImluYm91bmRzIjogWwogICAg
-ewogICAgICAicG9ydCI6ICRQT1JULAogICAgICAicHJvdG9jb2wiOiAidmxlc3MiLAogICAgICAi
-c2V0dGluZ3MiOiB7CiAgICAgICAgImRlY3J5cHRpb24iOiAibm9uZSIsCiAgICAgICAgImNsaWVu
-dHMiOiBbCiAgICAgICAgICB7CiAgICAgICAgICAgICJpZCI6ICJiODMxMzgxZC02MzI0LTRkNTMt
-YWQ0Zi04Y2RhNDhiMzA4MTEiCiAgICAgICAgICB9CiAgICAgICAgXQogICAgICB9LAogICAgICAi
-c3RyZWFtU2V0dGluZ3MiOiB7CiAgICAgICAgIm5ldHdvcmsiOiAid3MiLAogICAgICAgICJ3c1Nl
-dHRpbmdzIjogewogICAgICAgICAgInBhdGgiOiAiLyIKICAgICAgICB9CiAgICAgIH0KICAgIH0K
-ICBdLAogICJvdXRib3VuZHMiOiBbCiAgICB7CiAgICAgICJwcm90b2NvbCI6ICJmcmVlZG9tIgog
-ICAgfQogIF0KfQpFT0YKCiNydW4geHJheQoKeHJheSAtYyAvZXRjL3hyYXkvY29uZmlnLmpzb24K
+#!/bin/bash
+cat << EOF > /etc/xray/config.json
+{
+  "inbounds": [
+    {
+      "port": $PORT,
+      "protocol": "${PROTOCOL:-vless}",
+      "settings": {
+        "decryption": "none",
+        "clients": [
+          {
+            "id": "${UUID:-b831381d-6324-4d53-ad4f-8cda48b30811}"
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "wsSettings": {
+          "path": "${WS_PATH:-/}"
+        }
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom"
+    }
+  ]
+}
+EOF
+
+#run xray
+
+xray -c /etc/xray/config.json
